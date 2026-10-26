@@ -1,1 +1,786 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Playground — Riya Jamgaonkar</title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><div class="topline"></div><header class="header"><nav class="nav wrap"><a class="brand" href="index.html"><span class="brand-icon">r<span>✳</span></span><span>riya<span class="pink">.</span>dev</span></a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button><div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a class="active" href="playground.html">Playground</a><a class="nav-contact" href="contact.html">Say hello ↗</a></div></nav></header><main><section class="page-hero wrap"><p class="eyebrow">04 / CURIOSITY IN MOTION</p><h1>The little lab<br><span class="serif italic pink">of trying things.</span></h1><p class="lead">A playful corner for experiments, learning videos, and tiny interactive details. This is where ideas get messy before they get good.</p></section><section class="section wrap"><div class="section-head"><div><p class="eyebrow">TINY INTERACTIVE EXPERIMENT</p><h2>Make the blob <span class="serif italic pink">your own.</span></h2></div><span class="lab-tag">CSS · NO LIBRARIES</span></div><div class="play-lab"><div class="blob-stage" id="blobStage"><div class="interactive-blob" id="interactiveBlob"></div><span class="blob-caption">A LITTLE MOTION STUDY ✳</span></div><div class="blob-controls"><p>Choose a mood</p><button class="mood-btn active" data-mood="pink">Strawberry</button><button class="mood-btn" data-mood="grape">Grape soda</button><button class="mood-btn" data-mood="peach">Peachy</button><button class="mood-btn" data-mood="mint">Mint chip</button><p class="small-note">A small CSS experiment—tap a color and watch the shape change.</p><div class="code-snippet"><span>/* design is play */</span><br>.blob {<br>&nbsp; animation: float 4s ease-in-out infinite;<br>&nbsp; border-radius: 58% 42% 67% 33%;<br>}</div></div></div></section><section class="section soft-section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">LEARNING PLAYLIST</p><h2>Watch. Pause.<br><span class="serif italic pink">Try it yourself.</span></h2></div><span class="lab-tag">VIDEO CORNER</span></div><p class="section-intro">A few learning resources related to tools I use and topics I'm exploring. Embedded video playback needs an internet connection.</p><div class="video-grid"><article class="video-card"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/3c-iBn73dDE" title="Docker tutorial for beginners" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-card-copy"><span class="video-kicker">01 / CONTAINERS</span><h3>Docker for beginners</h3><p>Understanding images, containers, and why packaging apps consistently matters.</p><a href="https://www.youtube.com/results?search_query=Docker+beginner+tutorial+TechWorld+with+Nana" target="_blank" rel="noreferrer" class="arrow-link">More Docker tutorials ↗</a></div></article><article class="video-card"><a class="video-link-art" href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial" target="_blank" rel="noreferrer"><span class="play-button">▶</span><span class="video-art-label">AWS / CLOUD</span><span class="video-art-title">Containers meet<br>the cloud.</span><span class="video-art-foot">OPEN LEARNING PLAYLIST ↗</span></a><div class="video-card-copy"><span class="video-kicker">02 / CLOUD</span><h3>AWS ECS & ECR</h3><p>Explore tutorials on pushing container images and deploying services on AWS.</p><a href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial" target="_blank" rel="noreferrer" class="arrow-link">Browse videos ↗</a></div></article><article class="video-card"><a class="video-link-art art-ui-video" href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial" target="_blank" rel="noreferrer"><span class="play-button">▶</span><span class="video-art-label">FRONTEND / DESIGN</span><span class="video-art-title">Little details.<br>Big personality.</span><span class="video-art-foot">OPEN CSS PLAYLIST ↗</span></a><div class="video-card-copy"><span class="video-kicker">03 / CREATIVE CODE</span><h3>CSS motion & interaction</h3><p>Ideas for playful transitions, responsive layouts, and interfaces with personality.</p><a href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial" target="_blank" rel="noreferrer" class="arrow-link">Browse videos ↗</a></div></article></div></div></section><section class="section wrap"><div class="journal-card"><div class="journal-mark">✳</div><div><p class="eyebrow">NOTE TO SELF</p><h2>Build it. Break it.<br><span class="serif italic pink">Learn why.</span></h2><p>My favourite learning loop is simple: start small, test often, keep notes, and don't be afraid to start again.</p></div><a class="btn btn-dark" href="projects.html">Back to projects ↗</a></div></section></main><footer class="footer"><div class="wrap footer-inner"><a class="brand" href="index.html"><span class="brand-icon">r<span>✳</span></span><span>riya<span class="pink">.</span>dev</span></a><span>Designed with curiosity & built with code.</span><span>© <b id="year"></b> Riya Jamgaonkar</span></div></footer><script src="script.js"></script></body></html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground — Riya Jamgaonkar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PLAYGROUND EXTRAS */
+    .arcade-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .play-card {
+      background: var(--white, #fff);
+      border: 1px solid var(--line, #f1dce6);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow, 0 18px 50px #8f3f6812);
+      min-width: 0;
+    }
+
+    .play-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .play-card h3 {
+      margin: 8px 0;
+      font-size: 1.35rem;
+    }
+
+    .play-card p {
+      color: var(--muted, #806c79);
+      line-height: 1.7;
+    }
+
+    .mini-label {
+      font: 500 0.7rem 'DM Mono', monospace;
+      color: var(--hot, #e83e7d);
+      letter-spacing: 1px;
+    }
+
+    .game-arena {
+      min-height: 185px;
+      margin: 18px 0;
+      border-radius: 18px;
+      background: #fff0f6;
+      border: 1px dashed #f5b8d0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+
+    .game-arena.waiting {
+      background: #fff0f6;
+    }
+
+    .game-arena.go {
+      background: #baf7d0;
+      border-color: #48b878;
+      cursor: pointer;
+    }
+
+    .game-arena.too-soon {
+      background: #ffe0e0;
+    }
+
+    .game-arena strong {
+      font-size: 1.2rem;
+      color: #5d3655;
+    }
+
+    .game-arena span {
+      color: #806c79;
+      font-size: 0.85rem;
+    }
+
+    .play-btn {
+      border: 0;
+      background: #382633;
+      color: white;
+      border-radius: 100px;
+      padding: 12px 21px;
+      font: 600 0.9rem 'Manrope', sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: translateY(-2px);
+      background: #e83e7d;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #806c79;
+    }
+
+    .score-row strong {
+      color: #382633;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin: 20px 0 15px;
+    }
+
+    .swatch {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #38263312;
+    }
+
+    .swatch-color {
+      display: block;
+      height: 105px;
+    }
+
+    .swatch-code {
+      display: block;
+      padding: 10px 2px;
+      font: 500 0.63rem 'DM Mono', monospace;
+      color: #382633;
+      text-align: center;
+    }
+
+    .swatch:hover {
+      transform: translateY(-3px);
+    }
+
+    .surprise-box {
+      padding: 25px;
+      margin: 18px 0;
+      min-height: 130px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff0f6, #fce6ff, #fff5df);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #5d3655;
+    }
+
+    .arcade-intro {
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .arcade-intro p {
+      color: var(--muted, #806c79);
+      line-height: 1.8;
+    }
+
+    .blob-stage {
+      cursor: crosshair;
+    }
+
+    .mood-btn {
+      cursor: pointer;
+    }
+
+    .playground-divider {
+      height: 1px;
+      background: var(--line, #f1dce6);
+      margin: 20px 0;
+    }
+
+    .tiny-hint {
+      font-size: 0.76rem !important;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .arcade-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .play-card.full-width {
+        grid-column: auto;
+      }
+
+      .palette-grid {
+        gap: 5px;
+      }
+
+      .swatch-color {
+        height: 75px;
+      }
+
+      .swatch-code {
+        font-size: 0.55rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .play-btn,
+      .swatch,
+      .game-arena {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topline"></div>
+
+  <!-- NAVIGATION -->
+  <header class="header">
+    <nav class="nav wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-icon">r<span>✳</span></span>
+        <span>riya<span class="pink">.</span>dev</span>
+      </a>
+
+      <button class="menu-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false">☰</button>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a class="active" href="playground.html">Playground</a>
+        <a class="nav-contact" href="contact.html">Say hello ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="page-hero wrap">
+      <p class="eyebrow">04 / CURIOSITY IN MOTION</p>
+
+      <h1>
+        The little lab<br>
+        <span class="serif italic pink">of trying things.</span>
+      </h1>
+
+      <p class="lead">
+        A playful corner for experiments, little games,
+        learning videos, and tiny interactive details.
+      </p>
+
+      <p class="tiny-hint">
+        Made with curiosity, a little code, and lots of pink. ✳
+      </p>
+    </section>
+
+    <!-- MINI ARCADE -->
+    <section class="section wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">THE MINI ARCADE</p>
+          <h2>Pick your <span class="serif italic pink">little adventure.</span></h2>
+        </div>
+        <span class="lab-tag">PLAY · EXPLORE · REPEAT</span>
+      </div>
+
+      <div class="arcade-intro">
+        <p>
+          Take a tiny break! Test your reflexes, create a color palette,
+          or open a little surprise. No sign-up, no downloads, just fun.
+        </p>
+      </div>
+
+      <div class="arcade-grid">
+
+        <!-- GAME 1: REACTION RUSH -->
+        <article class="play-card">
+          <span class="mini-label">01 / REFLEXES</span>
+          <h3>Reaction Rush ⚡</h3>
+          <p>
+            Click start, wait for the green signal, then click as quickly
+            as you can. Don't jump the gun!
+          </p>
+
+          <div class="game-arena waiting" id="reactionArena" aria-live="polite">
+            <strong id="reactionMessage">Ready to test your reflexes?</strong>
+            <span id="reactionSubtext">Press start when you're ready.</span>
+          </div>
+
+          <button class="play-btn" id="reactionStart">Start game ↗</button>
+
+          <div class="playground-divider"></div>
+
+          <div class="score-row">
+            <span>Last time: <strong id="lastTime">—</strong></span>
+            <span>Best time: <strong id="bestTime">—</strong></span>
+          </div>
+
+          <p class="tiny-hint">
+            A lower time is better. Wait for green before clicking!
+          </p>
+        </article>
+
+        <!-- GAME 2: COLOR GENERATOR -->
+        <article class="play-card">
+          <span class="mini-label">02 / COLOR & DESIGN</span>
+          <h3>Color Playground 🎨</h3>
+          <p>
+            Generate a fresh five-color palette. Found a favorite?
+            Click its HEX code to copy it.
+          </p>
+
+          <div class="palette-grid" id="paletteGrid">
+            <!-- Colors are generated by JavaScript -->
+          </div>
+
+          <button class="play-btn" id="generatePalette">
+            Generate palette ✳
+          </button>
+
+          <p class="tiny-hint" id="paletteMessage" aria-live="polite">
+            Tip: click any color to copy its HEX code.
+          </p>
+        </article>
+
+        <!-- SURPRISE -->
+        <article class="play-card full-width">
+          <span class="mini-label">03 / A LITTLE RANDOMNESS</span>
+          <h3>Open a little surprise ✨</h3>
+          <p>
+            Need inspiration? Get a random thought, creative challenge,
+            or tiny reminder.
+          </p>
+
+          <div class="surprise-box" id="surpriseText" aria-live="polite">
+            Your next little surprise is waiting...
+          </div>
+
+          <button class="play-btn" id="surpriseButton">
+            Surprise me ↗
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ORIGINAL BLOB EXPERIMENT -->
+    <section class="section wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TINY INTERACTIVE EXPERIMENT</p>
+          <h2>Make the blob <span class="serif italic pink">your own.</span></h2>
+        </div>
+        <span class="lab-tag">CSS · NO LIBRARIES</span>
+      </div>
+
+      <div class="play-lab">
+        <div class="blob-stage" id="blobStage">
+          <div class="interactive-blob" id="interactiveBlob"></div>
+          <span class="blob-caption">A LITTLE MOTION STUDY ✳</span>
+        </div>
+
+        <div class="blob-controls">
+          <p>Choose a mood</p>
+
+          <button class="mood-btn active" data-mood="pink">Strawberry</button>
+          <button class="mood-btn" data-mood="grape">Grape soda</button>
+          <button class="mood-btn" data-mood="peach">Peachy</button>
+          <button class="mood-btn" data-mood="mint">Mint chip</button>
+
+          <p class="small-note">
+            Pick a color and watch the shape change.
+          </p>
+
+          <div class="code-snippet">
+            <span>/* design is play */</span><br>
+            .blob {<br>
+            &nbsp; animation: float 4s ease-in-out infinite;<br>
+            &nbsp; border-radius: 58% 42% 67% 33%;<br>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEARNING PLAYLIST -->
+    <section class="section soft-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">LEARNING PLAYLIST</p>
+            <h2>
+              Watch. Pause.<br>
+              <span class="serif italic pink">Try it yourself.</span>
+            </h2>
+          </div>
+          <span class="lab-tag">VIDEO CORNER</span>
+        </div>
+
+        <p class="section-intro">
+          A few learning resources related to tools I use and topics
+          I'm exploring. Embedded videos need an internet connection.
+        </p>
+
+        <div class="video-grid">
+          <!-- DOCKER -->
+          <article class="video-card">
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/3c-iBn73dDE"
+                title="Docker tutorial for beginners"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="video-card-copy">
+              <span class="video-kicker">01 / CONTAINERS</span>
+              <h3>Docker for beginners</h3>
+              <p>
+                Understanding images, containers, and why packaging
+                apps consistently matters.
+              </p>
+              <a
+                href="https://www.youtube.com/results?search_query=Docker+beginner+tutorial+TechWorld+with+Nana"
+                target="_blank"
+                rel="noreferrer"
+                class="arrow-link">
+                More Docker tutorials ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- AWS -->
+          <article class="video-card">
+            <a
+              class="video-link-art"
+              href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial"
+              target="_blank"
+              rel="noreferrer">
+              <span class="play-button">▶</span>
+              <span class="video-art-label">AWS / CLOUD</span>
+              <span class="video-art-title">
+                Containers meet<br>the cloud.
+              </span>
+              <span class="video-art-foot">OPEN LEARNING PLAYLIST ↗</span>
+            </a>
+
+            <div class="video-card-copy">
+              <span class="video-kicker">02 / CLOUD</span>
+              <h3>AWS ECS & ECR</h3>
+              <p>
+                Explore tutorials on pushing container images
+                and deploying services on AWS.
+              </p>
+              <a
+                href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial"
+                target="_blank"
+                rel="noreferrer"
+                class="arrow-link">
+                Browse videos ↗
+              </a>
+            </div>
+          </article>
+
+          <!-- CSS -->
+          <article class="video-card">
+            <a
+              class="video-link-art art-ui-video"
+              href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial"
+              target="_blank"
+              rel="noreferrer">
+              <span class="play-button">▶</span>
+              <span class="video-art-label">FRONTEND / DESIGN</span>
+              <span class="video-art-title">
+                Little details.<br>Big personality.
+              </span>
+              <span class="video-art-foot">OPEN CSS PLAYLIST ↗</span>
+            </a>
+
+            <div class="video-card-copy">
+              <span class="video-kicker">03 / CREATIVE CODE</span>
+              <h3>CSS motion & interaction</h3>
+              <p>
+                Ideas for playful transitions, responsive layouts,
+                and interfaces with personality.
+              </p>
+              <a
+                href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial"
+                target="_blank"
+                rel="noreferrer"
+                class="arrow-link">
+                Browse videos ↗
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING NOTE -->
+    <section class="section wrap">
+      <div class="journal-card">
+        <div class="journal-mark">✳</div>
+
+        <div>
+          <p class="eyebrow">NOTE TO SELF</p>
+          <h2>
+            Build it. Break it.<br>
+            <span class="serif italic pink">Learn why.</span>
+          </h2>
+          <p>
+            My favourite learning loop is simple: start small,
+            test often, keep notes, and don't be afraid to start again.
+          </p>
+        </div>
+
+        <a class="btn btn-dark" href="projects.html">
+          Back to projects ↗
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-icon">r<span>✳</span></span>
+        <span>riya<span class="pink">.</span>dev</span>
+      </a>
+
+      <span>Designed with curiosity & built with code.</span>
+      <span>© <b id="year"></b> Riya Jamgaonkar</span>
+    </div>
+  </footer>
+
+  <!-- EXISTING SITE SCRIPT -->
+  <script src="script.js"></script>
+
+  <!-- PLAYGROUND INTERACTIONS -->
+  <script>
+    // --------------------------------------------------
+    // 1. REACTION RUSH
+    // --------------------------------------------------
+    const arena = document.getElementById("reactionArena");
+    const startButton = document.getElementById("reactionStart");
+    const reactionMessage = document.getElementById("reactionMessage");
+    const reactionSubtext = document.getElementById("reactionSubtext");
+    const lastTime = document.getElementById("lastTime");
+    const bestTime = document.getElementById("bestTime");
+
+    let gameState = "ready";
+    let signalTime = 0;
+    let timeoutId = null;
+    let startTime = 0;
+    let best = null;
+
+    function resetReactionGame() {
+      clearTimeout(timeoutId);
+      gameState = "waiting";
+      arena.className = "game-arena waiting";
+      reactionMessage.textContent = "Wait for green...";
+      reactionSubtext.textContent = "Stay ready. Don't click yet!";
+      startButton.textContent = "Waiting...";
+      startButton.disabled = true;
+
+      const delay = 1500 + Math.random() * 3500;
+
+      timeoutId = setTimeout(() => {
+        if (gameState !== "waiting") return;
+
+        gameState = "go";
+        signalTime = performance.now();
+        arena.className = "game-arena go";
+        reactionMessage.textContent = "CLICK NOW! 💚";
+        reactionSubtext.textContent = "Quick! Quick! Quick!";
+        startButton.textContent = "Signal is green!";
+      }, delay);
+    }
+
+    function finishReactionGame() {
+      if (gameState === "waiting") {
+        clearTimeout(timeoutId);
+        gameState = "early";
+        arena.className = "game-arena too-soon";
+        reactionMessage.textContent = "Too early! 😅";
+        reactionSubtext.textContent = "Wait for green before clicking.";
+        startButton.textContent = "Try again ↗";
+        startButton.disabled = false;
+        return;
+      }
+
+      if (gameState === "go") {
+        const reaction = Math.round(performance.now() - signalTime);
+        gameState = "result";
+
+        arena.className = "game-arena waiting";
+        reactionMessage.textContent = reaction + " ms! 🎉";
+        reactionSubtext.textContent =
+          reaction < 220 ? "Lightning-fast reflexes!" :
+          reaction < 320 ? "Nice! Pretty quick." :
+          "Good try! Can you beat that?";
+
+        lastTime.textContent = reaction + " ms";
+
+        if (best === null || reaction < best) {
+          best = reaction;
+          bestTime.textContent = best + " ms";
+        }
+
+        startButton.textContent = "Play again ↗";
+        startButton.disabled = false;
+      }
+    }
+
+    startButton.addEventListener("click", () => {
+      if (gameState === "ready" || gameState === "result" ||
+          gameState === "early") {
+        resetReactionGame();
+      }
+    });
+
+    arena.addEventListener("click", () => {
+      if (gameState === "waiting" || gameState === "go") {
+        finishReactionGame();
+      }
+    });
+
+    // --------------------------------------------------
+    // 2. COLOR PLAYGROUND
+    // --------------------------------------------------
+    const paletteGrid = document.getElementById("paletteGrid");
+    const generatePaletteButton = document.getElementById("generatePalette");
+    const paletteMessage = document.getElementById("paletteMessage");
+
+    function randomHex() {
+      const digits = "0123456789ABCDEF";
+      let color = "#";
+
+      for (let i = 0; i < 6; i++) {
+        color += digits[Math.floor(Math.random() * 16)];
+      }
+
+      return color;
+    }
+
+    function generatePalette() {
+      paletteGrid.innerHTML = "";
+
+      for (let i = 0; i < 5; i++) {
+        const color = randomHex();
+        const swatch = document.createElement("button");
+        swatch.className = "swatch";
+        swatch.type = "button";
+        swatch.setAttribute("aria-label", "Copy color " + color);
+        swatch.title = "Click to copy " + color;
+
+        const colorBox = document.createElement("span");
+        colorBox.className = "swatch-color";
+        colorBox.style.backgroundColor = color;
+
+        const code = document.createElement("span");
+        code.className = "swatch-code";
+        code.textContent = color;
+
+        swatch.append(colorBox, code);
+
+        swatch.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(color);
+            paletteMessage.textContent = color + " copied! ✨";
+          } catch (error) {
+            paletteMessage.textContent =
+              "Your color is " + color + " — copy it manually.";
+          }
+        });
+
+        paletteGrid.appendChild(swatch);
+      }
+
+      paletteMessage.textContent =
+        "New colors, new inspiration. Click a HEX code to copy it.";
+    }
+
+    generatePaletteButton.addEventListener("click", generatePalette);
+    generatePalette();
+
+    // --------------------------------------------------
+    // 3. LITTLE SURPRISE
+    // --------------------------------------------------
+    const surpriseText = document.getElementById("surpriseText");
+    const surpriseButton = document.getElementById("surpriseButton");
+
+    const surprises = [
+      "You don't have to be perfect to build something wonderful. ✨",
+      "Creative challenge: design something using only two colors.",
+      "Fun fact: the first computer bug was an actual moth found in a computer.",
+      "Tiny reminder: progress is still progress, even when it's slow. 🌷",
+      "Creative challenge: make an ordinary button feel magical.",
+      "Try something today that you couldn't do yesterday.",
+      "Good ideas often begin with a very small experiment. ✳",
+      "Your next project doesn't need to be huge. It just needs to begin.",
+      "Design prompt: what would your dream workspace look like?",
+      "Take a breath, drink some water, and keep creating. 💗",
+      "Fun fact: octopuses have three hearts!",
+      "Today's challenge: learn one new keyboard shortcut."
+    ];
+
+    let previousSurprise = -1;
+
+    surpriseButton.addEventListener("click", () => {
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * surprises.length);
+      } while (index === previousSurprise);
+
+      previousSurprise = index;
+      surpriseText.textContent = surprises[index];
+    });
+
+    // --------------------------------------------------
+    // 4. ORIGINAL BLOB COLOR CONTROLS
+    // --------------------------------------------------
+    const blob = document.getElementById("interactiveBlob");
+    const moodButtons = document.querySelectorAll(".mood-btn");
+
+    const moods = {
+      pink: {
+        background: "linear-gradient(135deg, #ff9fc5, #f15b91)"
+      },
+      grape: {
+        background: "linear-gradient(135deg, #c7a7ff, #9063df)"
+      },
+      peach: {
+        background: "linear-gradient(135deg, #ffd0ae, #ff9b82)"
+      },
+      mint: {
+        background: "linear-gradient(135deg, #baf2d0, #65c9aa)"
+      }
+    };
+
+    moodButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const mood = button.dataset.mood;
+
+        if (!moods[mood] || !blob) return;
+
+        blob.style.background = moods[mood].background;
+
+        moodButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+      });
+    });
+
+    // Update the footer year
+    const yearElement = document.getElementById("year");
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
+```
