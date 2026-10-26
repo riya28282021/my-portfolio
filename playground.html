@@ -4,27 +4,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff7fa">
   <title>Playground — Riya Jamgaonkar</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* PLAYGROUND EXTRAS */
+    /* ==================================
+       BASE & RESPONSIVE LAYOUT
+    ================================== */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      width: 100%;
+      min-width: 0;
+      overflow-wrap: break-word;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    img,
+    iframe,
+    video {
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section {
+      padding-top: 65px;
+      padding-bottom: 65px;
+    }
+
+    .page-hero {
+      padding-top: 65px;
+      padding-bottom: 40px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.12;
+      overflow-wrap: anywhere;
+    }
+
+    .page-hero .lead {
+      max-width: 620px;
+      line-height: 1.8;
+    }
+
+    .eyebrow,
+    .mini-label,
+    .video-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+    }
+
+    .mini-label,
+    .video-kicker {
+      color: #e83e7d;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .section-intro {
+      max-width: 650px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .lab-tag {
+      font: 500 0.65rem 'DM Mono', monospace;
+      letter-spacing: 0.7px;
+      white-space: normal;
+    }
+
+    /* ==================================
+       NAVIGATION
+    ================================== */
+
+    .header {
+      position: relative;
+      z-index: 100;
+    }
+
+    .header .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 72px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid #f1dce6;
+      background: #fff;
+      color: #382633;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* ==================================
+       MINI ARCADE
+    ================================== */
+
+    .arcade-intro {
+      max-width: 650px;
+      margin-bottom: 25px;
+    }
+
+    .arcade-intro p {
+      color: #806c79;
+      line-height: 1.8;
+    }
+
     .arcade-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 22px;
+      width: 100%;
     }
 
     .play-card {
-      background: var(--white, #fff);
-      border: 1px solid var(--line, #f1dce6);
-      border-radius: 22px;
-      padding: 26px;
-      box-shadow: var(--shadow, 0 18px 50px #8f3f6812);
       min-width: 0;
+      max-width: 100%;
+      padding: 24px;
+      border: 1px solid #f1dce6;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 12px 35px #8f3f680d;
     }
 
     .play-card.full-width {
@@ -32,89 +190,114 @@
     }
 
     .play-card h3 {
-      margin: 8px 0;
-      font-size: 1.35rem;
+      font-size: clamp(20px, 2.5vw, 25px);
+      line-height: 1.3;
+      margin: 10px 0;
     }
 
     .play-card p {
-      color: var(--muted, #806c79);
-      line-height: 1.7;
-    }
-
-    .mini-label {
-      font: 500 0.7rem 'DM Mono', monospace;
-      color: var(--hot, #e83e7d);
-      letter-spacing: 1px;
+      color: #806c79;
+      font-size: 0.92rem;
+      line-height: 1.8;
     }
 
     .game-arena {
-      min-height: 185px;
+      min-height: 175px;
       margin: 18px 0;
+      padding: 20px;
+      border: 1px dashed #f5b8d0;
       border-radius: 18px;
       background: #fff0f6;
-      border: 1px dashed #f5b8d0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
       gap: 10px;
-      transition: background 0.2s;
+      transition: background 0.2s ease;
     }
 
-    .game-arena.waiting {
-      background: #fff0f6;
+    .game-arena strong {
+      color: #5d3655;
+      font-size: clamp(17px, 3vw, 21px);
+    }
+
+    .game-arena span {
+      color: #806c79;
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
 
     .game-arena.go {
       background: #baf7d0;
       border-color: #48b878;
       cursor: pointer;
+      user-select: none;
     }
 
     .game-arena.too-soon {
       background: #ffe0e0;
     }
 
-    .game-arena strong {
-      font-size: 1.2rem;
-      color: #5d3655;
-    }
-
-    .game-arena span {
-      color: #806c79;
-      font-size: 0.85rem;
-    }
-
     .play-btn {
+      max-width: 100%;
       border: 0;
-      background: #382633;
-      color: white;
       border-radius: 100px;
-      padding: 12px 21px;
-      font: 600 0.9rem 'Manrope', sans-serif;
+      padding: 12px 20px;
+      background: #382633;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: transform 0.2s, background 0.2s;
     }
 
     .play-btn:hover {
-      transform: translateY(-2px);
       background: #e83e7d;
+      transform: translateY(-2px);
+    }
+
+    .play-btn:focus-visible,
+    .menu-toggle:focus-visible,
+    .swatch:focus-visible {
+      outline: 3px solid #e83e7d;
+      outline-offset: 3px;
+    }
+
+    .play-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .playground-divider {
+      height: 1px;
+      background: #f1dce6;
+      margin: 20px 0;
     }
 
     .score-row {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
       flex-wrap: wrap;
-      font-size: 0.85rem;
+      gap: 10px;
       color: #806c79;
+      font-size: 0.82rem;
     }
 
     .score-row strong {
       color: #382633;
     }
+
+    .tiny-hint {
+      font-size: 0.76rem !important;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    /* ==================================
+       COLOR PALETTE
+    ================================== */
 
     .palette-grid {
       display: grid;
@@ -124,85 +307,413 @@
     }
 
     .swatch {
+      display: block;
+      width: 100%;
       min-width: 0;
       padding: 0;
       border: 0;
-      background: white;
-      border-radius: 12px;
+      border-radius: 11px;
       overflow: hidden;
-      cursor: pointer;
+      background: #fff;
       box-shadow: 0 2px 8px #38263312;
-    }
-
-    .swatch-color {
-      display: block;
-      height: 105px;
-    }
-
-    .swatch-code {
-      display: block;
-      padding: 10px 2px;
-      font: 500 0.63rem 'DM Mono', monospace;
-      color: #382633;
-      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
     .swatch:hover {
       transform: translateY(-3px);
     }
 
+    .swatch-color {
+      display: block;
+      height: clamp(55px, 8vw, 105px);
+    }
+
+    .swatch-code {
+      display: block;
+      padding: 9px 1px;
+      color: #382633;
+      font: 500 clamp(8px, 1vw, 11px) 'DM Mono', monospace;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ==================================
+       SURPRISE
+    ================================== */
+
     .surprise-box {
-      padding: 25px;
-      margin: 18px 0;
-      min-height: 130px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #fff0f6, #fce6ff, #fff5df);
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      line-height: 1.6;
+      min-height: 140px;
+      padding: 25px;
+      margin: 18px 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff0f6, #fce6ff, #fff5df);
       color: #5d3655;
+      text-align: center;
+      font: 600 clamp(18px, 3vw, 24px)/1.6 'Playfair Display', serif;
     }
 
-    .arcade-intro {
-      max-width: 650px;
-      margin-bottom: 28px;
-    }
+    /* ==================================
+       BLOB EXPERIMENT
+    ================================== */
 
-    .arcade-intro p {
-      color: var(--muted, #806c79);
-      line-height: 1.8;
+    .play-lab {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 25px;
+      align-items: stretch;
     }
 
     .blob-stage {
-      cursor: crosshair;
+      position: relative;
+      display: flex;
+      min-width: 0;
+      min-height: 300px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      overflow: hidden;
+      border: 1px solid #f1dce6;
+      border-radius: 22px;
+      background: #fff5f9;
+    }
+
+    .interactive-blob {
+      width: clamp(130px, 22vw, 210px);
+      aspect-ratio: 1;
+      max-width: 70%;
+      border-radius: 58% 42% 67% 33% / 48% 56% 44% 52%;
+      background: linear-gradient(135deg, #ff9fc5, #f15b91);
+      animation: blobFloat 4s ease-in-out infinite alternate;
+      transition: background 0.35s, border-radius 0.5s;
+    }
+
+    .blob-stage:hover .interactive-blob {
+      border-radius: 42% 58% 35% 65% / 55% 40% 60% 45%;
+    }
+
+    .blob-caption {
+      font: 500 0.65rem 'DM Mono', monospace;
+      letter-spacing: 1px;
+      color: #806c79;
+    }
+
+    @keyframes blobFloat {
+      from {
+        transform: translateY(-7px) rotate(-5deg);
+      }
+      to {
+        transform: translateY(8px) rotate(5deg);
+      }
+    }
+
+    .blob-controls {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid #f1dce6;
+      border-radius: 22px;
+      background: #fff;
     }
 
     .mood-btn {
+      margin: 4px 4px 4px 0;
+      padding: 9px 13px;
+      border: 1px solid #f1dce6;
+      border-radius: 100px;
+      background: #fff;
+      color: #5d3655;
+      font-size: 0.8rem;
       cursor: pointer;
     }
 
-    .playground-divider {
-      height: 1px;
-      background: var(--line, #f1dce6);
-      margin: 20px 0;
+    .mood-btn.active {
+      border-color: #e83e7d;
+      background: #fff0f6;
+      color: #c32966;
     }
 
-    .tiny-hint {
-      font-size: 0.76rem !important;
-      margin-top: 12px;
+    .code-snippet {
+      padding: 16px;
+      border-radius: 12px;
+      background: #382633;
+      color: #ffe5f0;
+      font: 0.75rem/1.9 'DM Mono', monospace;
+      overflow-wrap: anywhere;
     }
 
-    @media (max-width: 700px) {
+    .code-snippet span {
+      color: #f5a8cb;
+    }
+
+    /* ==================================
+       LEARNING CARDS
+    ================================== */
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .video-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #f1dce6;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #382633;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-link-art {
+      display: flex;
+      min-height: 190px;
+      padding: 20px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, #70435d, #e83e7d);
+    }
+
+    .art-ui-video {
+      background: linear-gradient(135deg, #382633, #9b6794, #f2a9c8);
+    }
+
+    .play-button {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 50%;
+      background: #ffffff35;
+      border: 1px solid #ffffff70;
+    }
+
+    .video-art-label,
+    .video-art-foot {
+      font: 500 0.63rem 'DM Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    .video-art-title {
+      font: 700 1.5rem/1.3 'Playfair Display', serif;
+    }
+
+    .video-card-copy {
+      padding: 20px;
+    }
+
+    .video-card-copy h3 {
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .video-card-copy p {
+      color: #806c79;
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    .arrow-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: #d83270;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    /* ==================================
+       CLOSING NOTE & FOOTER
+    ================================== */
+
+    .journal-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid #f1dce6;
+      border-radius: 22px;
+      background: #fff7fa;
+    }
+
+    .journal-card > div {
+      min-width: 0;
+    }
+
+    .journal-mark {
+      color: #e83e7d;
+      font-size: 35px;
+    }
+
+    .journal-card p {
+      max-width: 500px;
+      color: #806c79;
+      line-height: 1.8;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-top: 25px;
+      padding-bottom: 25px;
+    }
+
+    .footer-inner > span {
+      color: #806c79;
+      font-size: 0.8rem;
+    }
+
+    /* ==================================
+       TABLET
+    ================================== */
+
+    @media (max-width: 900px) {
+      .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .arcade-grid {
-        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .play-card {
+        padding: 20px;
+      }
+
+      .play-lab {
+        gap: 15px;
+      }
+
+      .blob-controls {
+        padding: 18px;
+      }
+
+      .journal-card {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ==================================
+       MOBILE NAVIGATION
+    ================================== */
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: calc(100% - 32px);
+      }
+
+      .header .nav {
+        position: relative;
+        min-height: 68px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .header .nav .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 0 16px;
+      }
+
+      .header .nav .nav-links.menu-open {
+        display: flex;
+      }
+
+      .header .nav .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 13px 10px;
+      }
+
+      .header .nav .nav-links .nav-contact {
+        margin-top: 6px;
+      }
+    }
+
+    /* ==================================
+       SMALL MOBILE
+    ================================== */
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: calc(100% - 28px);
+      }
+
+      .section {
+        padding-top: 42px;
+        padding-bottom: 42px;
+      }
+
+      .page-hero {
+        padding-top: 42px;
+        padding-bottom: 25px;
+      }
+
+      .page-hero h1 {
+        font-size: clamp(36px, 10vw, 52px);
+      }
+
+      .arcade-grid,
+      .video-grid,
+      .play-lab {
+        grid-template-columns: minmax(0, 1fr);
       }
 
       .play-card.full-width {
         grid-column: auto;
+      }
+
+      .play-card {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(27px, 8vw, 36px);
+      }
+
+      .game-arena {
+        min-height: 150px;
+        padding: 15px;
       }
 
       .palette-grid {
@@ -210,19 +721,92 @@
       }
 
       .swatch-color {
-        height: 75px;
+        height: 65px;
       }
 
       .swatch-code {
-        font-size: 0.55rem;
+        font-size: 9px;
+        padding: 8px 0;
+      }
+
+      .surprise-box {
+        min-height: 120px;
+        padding: 18px;
+      }
+
+      .blob-stage {
+        min-height: 260px;
+      }
+
+      .interactive-blob {
+        width: 155px;
+      }
+
+      .blob-controls {
+        padding: 18px;
+      }
+
+      .video-grid {
+        gap: 18px;
+      }
+
+      .video-link-art {
+        min-height: 170px;
+      }
+
+      .journal-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .play-btn {
+        min-height: 42px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .wrap {
+        width: calc(100% - 22px);
+      }
+
+      .play-card {
+        padding: 14px;
+      }
+
+      .palette-grid {
+        gap: 3px;
+      }
+
+      .swatch-code {
+        font-size: 8px;
+      }
+
+      .score-row {
+        flex-direction: column;
+      }
+
+      .mood-btn {
+        padding: 8px 10px;
+        font-size: 0.75rem;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .play-btn,
-      .swatch,
-      .game-arena {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -239,11 +823,16 @@
         <span>riya<span class="pink">.</span>dev</span>
       </a>
 
-      <button class="menu-toggle"
+      <button
+        class="menu-toggle"
+        type="button"
         aria-label="Toggle navigation"
-        aria-expanded="false">☰</button>
+        aria-expanded="false"
+        aria-controls="mainNav">
+        ☰
+      </button>
 
-      <div class="nav-links">
+      <div class="nav-links" id="mainNav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="experience.html">Experience</a>
@@ -292,22 +881,29 @@
       </div>
 
       <div class="arcade-grid">
-
-        <!-- GAME 1: REACTION RUSH -->
+        <!-- REACTION RUSH -->
         <article class="play-card">
           <span class="mini-label">01 / REFLEXES</span>
           <h3>Reaction Rush ⚡</h3>
           <p>
-            Click start, wait for the green signal, then click as quickly
+            Press start, wait for the green signal, then click as quickly
             as you can. Don't jump the gun!
           </p>
 
-          <div class="game-arena waiting" id="reactionArena" aria-live="polite">
+          <div
+            class="game-arena waiting"
+            id="reactionArena"
+            aria-live="polite"
+            role="button"
+            tabindex="0"
+            aria-label="Reaction game area">
             <strong id="reactionMessage">Ready to test your reflexes?</strong>
             <span id="reactionSubtext">Press start when you're ready.</span>
           </div>
 
-          <button class="play-btn" id="reactionStart">Start game ↗</button>
+          <button class="play-btn" id="reactionStart" type="button">
+            Start game ↗
+          </button>
 
           <div class="playground-divider"></div>
 
@@ -317,29 +913,27 @@
           </div>
 
           <p class="tiny-hint">
-            A lower time is better. Wait for green before clicking!
+            Lower is better. Wait for green before clicking!
           </p>
         </article>
 
-        <!-- GAME 2: COLOR GENERATOR -->
+        <!-- COLOR PLAYGROUND -->
         <article class="play-card">
           <span class="mini-label">02 / COLOR & DESIGN</span>
           <h3>Color Playground 🎨</h3>
           <p>
-            Generate a fresh five-color palette. Found a favorite?
-            Click its HEX code to copy it.
+            Generate a fresh five-color palette. Click a color to copy
+            its HEX code.
           </p>
 
-          <div class="palette-grid" id="paletteGrid">
-            <!-- Colors are generated by JavaScript -->
-          </div>
+          <div class="palette-grid" id="paletteGrid"></div>
 
-          <button class="play-btn" id="generatePalette">
+          <button class="play-btn" id="generatePalette" type="button">
             Generate palette ✳
           </button>
 
           <p class="tiny-hint" id="paletteMessage" aria-live="polite">
-            Tip: click any color to copy its HEX code.
+            Click any color to copy its HEX code.
           </p>
         </article>
 
@@ -348,22 +942,21 @@
           <span class="mini-label">03 / A LITTLE RANDOMNESS</span>
           <h3>Open a little surprise ✨</h3>
           <p>
-            Need inspiration? Get a random thought, creative challenge,
-            or tiny reminder.
+            Get a random thought, creative challenge, or tiny reminder.
           </p>
 
           <div class="surprise-box" id="surpriseText" aria-live="polite">
             Your next little surprise is waiting...
           </div>
 
-          <button class="play-btn" id="surpriseButton">
+          <button class="play-btn" id="surpriseButton" type="button">
             Surprise me ↗
           </button>
         </article>
       </div>
     </section>
 
-    <!-- ORIGINAL BLOB EXPERIMENT -->
+    <!-- BLOB EXPERIMENT -->
     <section class="section wrap">
       <div class="section-head">
         <div>
@@ -382,10 +975,18 @@
         <div class="blob-controls">
           <p>Choose a mood</p>
 
-          <button class="mood-btn active" data-mood="pink">Strawberry</button>
-          <button class="mood-btn" data-mood="grape">Grape soda</button>
-          <button class="mood-btn" data-mood="peach">Peachy</button>
-          <button class="mood-btn" data-mood="mint">Mint chip</button>
+          <button class="mood-btn active" type="button" data-mood="pink">
+            Strawberry
+          </button>
+          <button class="mood-btn" type="button" data-mood="grape">
+            Grape soda
+          </button>
+          <button class="mood-btn" type="button" data-mood="peach">
+            Peachy
+          </button>
+          <button class="mood-btn" type="button" data-mood="mint">
+            Mint chip
+          </button>
 
           <p class="small-note">
             Pick a color and watch the shape change.
@@ -417,8 +1018,8 @@
         </div>
 
         <p class="section-intro">
-          A few learning resources related to tools I use and topics
-          I'm exploring. Embedded videos need an internet connection.
+          Learning resources for cloud, containers, and creative coding.
+          Videos require an internet connection.
         </p>
 
         <div class="video-grid">
@@ -429,8 +1030,8 @@
                 src="https://www.youtube-nocookie.com/embed/3c-iBn73dDE"
                 title="Docker tutorial for beginners"
                 loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen>
               </iframe>
             </div>
@@ -439,13 +1040,13 @@
               <span class="video-kicker">01 / CONTAINERS</span>
               <h3>Docker for beginners</h3>
               <p>
-                Understanding images, containers, and why packaging
-                apps consistently matters.
+                Explore images, containers, and consistent application
+                environments.
               </p>
               <a
                 href="https://www.youtube.com/results?search_query=Docker+beginner+tutorial+TechWorld+with+Nana"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 class="arrow-link">
                 More Docker tutorials ↗
               </a>
@@ -458,7 +1059,7 @@
               class="video-link-art"
               href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial"
               target="_blank"
-              rel="noreferrer">
+              rel="noopener noreferrer">
               <span class="play-button">▶</span>
               <span class="video-art-label">AWS / CLOUD</span>
               <span class="video-art-title">
@@ -471,13 +1072,13 @@
               <span class="video-kicker">02 / CLOUD</span>
               <h3>AWS ECS & ECR</h3>
               <p>
-                Explore tutorials on pushing container images
-                and deploying services on AWS.
+                Learn about container registries and deploying
+                services on AWS.
               </p>
               <a
                 href="https://www.youtube.com/results?search_query=AWS+ECS+ECR+beginner+tutorial"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 class="arrow-link">
                 Browse videos ↗
               </a>
@@ -490,7 +1091,7 @@
               class="video-link-art art-ui-video"
               href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial"
               target="_blank"
-              rel="noreferrer">
+              rel="noopener noreferrer">
               <span class="play-button">▶</span>
               <span class="video-art-label">FRONTEND / DESIGN</span>
               <span class="video-art-title">
@@ -503,13 +1104,13 @@
               <span class="video-kicker">03 / CREATIVE CODE</span>
               <h3>CSS motion & interaction</h3>
               <p>
-                Ideas for playful transitions, responsive layouts,
-                and interfaces with personality.
+                Explore transitions, responsive layouts, and
+                creative interfaces.
               </p>
               <a
                 href="https://www.youtube.com/results?search_query=CSS+creative+portfolio+animation+tutorial"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 class="arrow-link">
                 Browse videos ↗
               </a>
@@ -531,8 +1132,8 @@
             <span class="serif italic pink">Learn why.</span>
           </h2>
           <p>
-            My favourite learning loop is simple: start small,
-            test often, keep notes, and don't be afraid to start again.
+            Start small, test often, keep notes, and don't be afraid
+            to start again.
           </p>
         </div>
 
@@ -561,9 +1162,47 @@
 
   <!-- PLAYGROUND INTERACTIONS -->
   <script>
-    // --------------------------------------------------
-    // 1. REACTION RUSH
-    // --------------------------------------------------
+    // ======================================
+    // MOBILE NAVIGATION
+    // ======================================
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("menu-open");
+
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Close navigation" : "Open navigation"
+        );
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+      });
+
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Open navigation");
+          menuToggle.textContent = "☰";
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 760) {
+          navLinks.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        }
+      });
+    }
+
+    // ======================================
+    // REACTION RUSH
+    // ======================================
+
     const arena = document.getElementById("reactionArena");
     const startButton = document.getElementById("reactionStart");
     const reactionMessage = document.getElementById("reactionMessage");
@@ -574,13 +1213,14 @@
     let gameState = "ready";
     let signalTime = 0;
     let timeoutId = null;
-    let startTime = 0;
     let best = null;
 
-    function resetReactionGame() {
+    function startReactionGame() {
       clearTimeout(timeoutId);
+
       gameState = "waiting";
       arena.className = "game-arena waiting";
+      arena.setAttribute("aria-label", "Waiting for the green signal");
       reactionMessage.textContent = "Wait for green...";
       reactionSubtext.textContent = "Stay ready. Don't click yet!";
       startButton.textContent = "Waiting...";
@@ -593,17 +1233,21 @@
 
         gameState = "go";
         signalTime = performance.now();
+
         arena.className = "game-arena go";
+        arena.setAttribute("aria-label", "Green signal! Click now");
         reactionMessage.textContent = "CLICK NOW! 💚";
-        reactionSubtext.textContent = "Quick! Quick! Quick!";
+        reactionSubtext.textContent = "Tap or click as quickly as you can!";
         startButton.textContent = "Signal is green!";
+        startButton.disabled = false;
       }, delay);
     }
 
-    function finishReactionGame() {
+    function handleReactionClick() {
       if (gameState === "waiting") {
         clearTimeout(timeoutId);
         gameState = "early";
+
         arena.className = "game-arena too-soon";
         reactionMessage.textContent = "Too early! 😅";
         reactionSubtext.textContent = "Wait for green before clicking.";
@@ -617,7 +1261,9 @@
         gameState = "result";
 
         arena.className = "game-arena waiting";
+        arena.setAttribute("aria-label", "Your reaction time was " + reaction + " milliseconds");
         reactionMessage.textContent = reaction + " ms! 🎉";
+
         reactionSubtext.textContent =
           reaction < 220 ? "Lightning-fast reflexes!" :
           reaction < 320 ? "Nice! Pretty quick." :
@@ -636,21 +1282,28 @@
     }
 
     startButton.addEventListener("click", () => {
-      if (gameState === "ready" || gameState === "result" ||
-          gameState === "early") {
-        resetReactionGame();
+      if (
+        gameState === "ready" ||
+        gameState === "result" ||
+        gameState === "early"
+      ) {
+        startReactionGame();
       }
     });
 
-    arena.addEventListener("click", () => {
-      if (gameState === "waiting" || gameState === "go") {
-        finishReactionGame();
+    arena.addEventListener("click", handleReactionClick);
+
+    arena.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleReactionClick();
       }
     });
 
-    // --------------------------------------------------
-    // 2. COLOR PLAYGROUND
-    // --------------------------------------------------
+    // ======================================
+    // COLOR PLAYGROUND
+    // ======================================
+
     const paletteGrid = document.getElementById("paletteGrid");
     const generatePaletteButton = document.getElementById("generatePalette");
     const paletteMessage = document.getElementById("paletteMessage");
@@ -666,8 +1319,22 @@
       return color;
     }
 
+    async function copyColor(color) {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) {
+          throw new Error("Clipboard unavailable");
+        }
+
+        await navigator.clipboard.writeText(color);
+        paletteMessage.textContent = color + " copied! ✨";
+      } catch (error) {
+        paletteMessage.textContent =
+          "Color: " + color + ". If copying failed, select and copy the code.";
+      }
+    }
+
     function generatePalette() {
-      paletteGrid.innerHTML = "";
+      paletteGrid.replaceChildren();
 
       for (let i = 0; i < 5; i++) {
         const color = randomHex();
@@ -686,37 +1353,29 @@
         code.textContent = color;
 
         swatch.append(colorBox, code);
-
-        swatch.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(color);
-            paletteMessage.textContent = color + " copied! ✨";
-          } catch (error) {
-            paletteMessage.textContent =
-              "Your color is " + color + " — copy it manually.";
-          }
-        });
+        swatch.addEventListener("click", () => copyColor(color));
 
         paletteGrid.appendChild(swatch);
       }
 
       paletteMessage.textContent =
-        "New colors, new inspiration. Click a HEX code to copy it.";
+        "Fresh colors generated! Click any color to copy its HEX code.";
     }
 
     generatePaletteButton.addEventListener("click", generatePalette);
     generatePalette();
 
-    // --------------------------------------------------
-    // 3. LITTLE SURPRISE
-    // --------------------------------------------------
+    // ======================================
+    // LITTLE SURPRISE
+    // ======================================
+
     const surpriseText = document.getElementById("surpriseText");
     const surpriseButton = document.getElementById("surpriseButton");
 
     const surprises = [
       "You don't have to be perfect to build something wonderful. ✨",
       "Creative challenge: design something using only two colors.",
-      "Fun fact: the first computer bug was an actual moth found in a computer.",
+      "Fun fact: the word 'robot' comes from a Czech word associated with work.",
       "Tiny reminder: progress is still progress, even when it's slow. 🌷",
       "Creative challenge: make an ordinary button feel magical.",
       "Try something today that you couldn't do yesterday.",
@@ -741,45 +1400,49 @@
       surpriseText.textContent = surprises[index];
     });
 
-    // --------------------------------------------------
-    // 4. ORIGINAL BLOB COLOR CONTROLS
-    // --------------------------------------------------
+    // ======================================
+    // BLOB COLOR CONTROLS
+    // ======================================
+
     const blob = document.getElementById("interactiveBlob");
     const moodButtons = document.querySelectorAll(".mood-btn");
 
     const moods = {
-      pink: {
-        background: "linear-gradient(135deg, #ff9fc5, #f15b91)"
-      },
-      grape: {
-        background: "linear-gradient(135deg, #c7a7ff, #9063df)"
-      },
-      peach: {
-        background: "linear-gradient(135deg, #ffd0ae, #ff9b82)"
-      },
-      mint: {
-        background: "linear-gradient(135deg, #baf2d0, #65c9aa)"
-      }
+      pink: "linear-gradient(135deg, #ff9fc5, #f15b91)",
+      grape: "linear-gradient(135deg, #c7a7ff, #9063df)",
+      peach: "linear-gradient(135deg, #ffd0ae, #ff9b82)",
+      mint: "linear-gradient(135deg, #baf2d0, #65c9aa)"
     };
 
     moodButtons.forEach(button => {
       button.addEventListener("click", () => {
         const mood = button.dataset.mood;
 
-        if (!moods[mood] || !blob) return;
+        if (!moods[mood]) return;
 
-        blob.style.background = moods[mood].background;
+        blob.style.background = moods[mood];
 
-        moodButtons.forEach(item => item.classList.remove("active"));
+        moodButtons.forEach(item => {
+          item.classList.remove("active");
+          item.setAttribute("aria-pressed", "false");
+        });
+
         button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
       });
+
+      button.setAttribute(
+        "aria-pressed",
+        button.classList.contains("active") ? "true" : "false"
+      );
     });
 
-    // Update the footer year
-    const yearElement = document.getElementById("year");
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
+    // ======================================
+    // FOOTER YEAR
+    // ======================================
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
   </script>
 </body>
 </html>
