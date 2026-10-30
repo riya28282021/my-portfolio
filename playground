@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playground | Riya's Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: #fff5f8;
+    color: #49323d;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: white;
+    box-shadow: 0 3px 15px #f5dce5;
+}
+
+nav h2 {
+    color: #e66b98;
+}
+
+nav a {
+    text-decoration: none;
+    color: #49323d;
+    font-weight: bold;
+}
+
+header {
+    text-align: center;
+    padding: 65px 20px 35px;
+}
+
+header h1 {
+    color: #df6492;
+    font-size: clamp(30px, 5vw, 45px);
+}
+
+header p {
+    margin-top: 12px;
+    color: #866a77;
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: 25px;
+    padding: 20px 0 60px;
+}
+
+.game {
+    background: white;
+    border-radius: 22px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px #f1dce4;
+}
+
+.game h2 {
+    color: #df6492;
+    margin-bottom: 12px;
+}
+
+.game p {
+    color: #876d79;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+button {
+    background: #e66b98;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 8px 3px;
+}
+
+button:hover {
+    background: #ca4e7d;
+    transform: translateY(-2px);
+}
+
+.result {
+    margin: 18px 0;
+    font-weight: bold;
+    color: #d65385;
+    min-height: 25px;
+}
+
+/* CLICK GAME */
+
+#target {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #ff8db2;
+    border: 5px solid #ffd2e0;
+    cursor: pointer;
+    display: none;
+    margin: 15px auto;
+}
+
+/* COLOR GAME */
+
+.color-preview {
+    height: 90px;
+    border-radius: 15px;
+    margin: 15px 0;
+    background: #ff8db2;
+    border: 3px solid #ffe1eb;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #e66b98;
+    margin: 10px 0;
+}
+
+/* MEMORY GAME */
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.memory-card {
+    background: #ffe1eb;
+    color: #d65385;
+    border-radius: 12px;
+    aspect-ratio: 1;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid #f8c4d5;
+    margin: 0;
+    padding: 0;
+}
+
+.memory-card:hover {
+    background: #ffd0df;
+    transform: none;
+}
+
+.memory-card.matched {
+    background: #f5d9e5;
+    cursor: default;
+    opacity: .65;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #987d89;
+}
+
+@media(max-width: 500px) {
+    nav {
+        padding: 17px 5%;
+    }
+
+    .game {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>Riya.</h2>
+    <a href="index.html">← Back to Home</a>
+</nav>
+
+<header>
+    <h1>Welcome to My Playground! 🎀</h1>
+    <p>A little space for fun, creativity and brain challenges.</p>
+</header>
+
+<div class="container">
+
+    <!-- GAME 1 -->
+    <section class="game">
+        <h2>🎯 Speed Challenge</h2>
+        <p>Click the target as many times as possible in 10 seconds!</p>
+
+        <div class="result" id="score">Score: 0</div>
+        <div id="target"></div>
+
+        <button onclick="startClickGame()">Start Game</button>
+        <div class="result" id="timer">Time: 10s</div>
+    </section>
+
+    <!-- GAME 2 -->
+    <section class="game">
+        <h2>🎨 Color Studio</h2>
+        <p>Mix red, green and blue to create your own color!</p>
+
+        <div class="color-preview" id="preview"></div>
+
+        <label>Red</label>
+        <input type="range" id="red" min="0" max="255" value="255">
+
+        <label>Green</label>
+        <input type="range" id="green" min="0" max="255" value="140">
+
+        <label>Blue</label>
+        <input type="range" id="blue" min="0" max="255" value="180">
+
+        <div class="result" id="colorCode">#FF8CB4</div>
+        <button onclick="copyColor()">Copy Color Code</button>
+    </section>
+
+    <!-- GAME 3 -->
+    <section class="game">
+        <h2>🧠 Memory Match</h2>
+        <p>Find all matching emoji pairs!</p>
+
+        <div class="result" id="memoryResult">Find the matching pairs!</div>
+        <div class="memory-grid" id="memoryGrid"></div>
+
+        <button onclick="newMemoryGame()">Restart Game</button>
+    </section>
+
+</div>
+
+<footer>
+    Made with 💗 by Riya | Thanks for visiting!
+</footer>
+
+<script>
+
+// SPEED CHALLENGE
+
+let score = 0;
+let timeLeft = 10;
+let gameActive = false;
+let gameTimer;
+
+const target = document.getElementById("target");
+
+function startClickGame() {
+    clearInterval(gameTimer);
+
+    score = 0;
+    timeLeft = 10;
+    gameActive = true;
+
+    document.getElementById("score").textContent = "Score: 0";
+    document.getElementById("timer").textContent = "Time: 10s";
+    target.style.display = "block";
+
+    gameTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = "Time: " + timeLeft + "s";
+
+        if (timeLeft <= 0) {
+            clearInterval(gameTimer);
+            gameActive = false;
+            target.style.display = "none";
+            document.getElementById("timer").textContent = "Time's up!";
+            document.getElementById("score").textContent =
+                "Final Score: " + score + " 🎉";
+        }
+    }, 1000);
+}
+
+target.addEventListener("click", () => {
+    if (!gameActive) return;
+
+    score++;
+    document.getElementById("score").textContent = "Score: " + score;
+
+    target.style.marginLeft = Math.floor(Math.random() * 65) + "%";
+});
+
+// COLOR STUDIO
+
+const sliders = ["red", "green", "blue"];
+
+function updateColor() {
+    const r = Number(document.getElementById("red").value);
+    const g = Number(document.getElementById("green").value);
+    const b = Number(document.getElementById("blue").value);
+
+    const color = `rgb(${r}, ${g}, ${b})`;
+
+    document.getElementById("preview").style.background = color;
+
+    const hex = "#" + [r, g, b].map(v =>
+        v.toString(16).padStart(2, "0")
+    ).join("").toUpperCase();
+
+    document.getElementById("colorCode").textContent = hex;
+}
+
+sliders.forEach(id => {
+    document.getElementById(id).addEventListener("input", updateColor);
+});
+
+function copyColor() {
+    const code = document.getElementById("colorCode").textContent;
+
+    navigator.clipboard.writeText(code).then(() => {
+        alert("Color copied: " + code);
+    }).catch(() => {
+        alert("Your color code is " + code);
+    });
+}
+
+// MEMORY MATCH
+
+const emojis = ["🌸", "🎀", "🍓", "🦋", "🌸", "🎀", "🍓", "🦋",
+                "🐱", "🍒", "🐱", "🍒", "⭐", "💗", "⭐", "💗"];
+
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let matches = 0;
+let memoryTimeout = null;
+
+function newMemoryGame() {
+    clearTimeout(memoryTimeout);
+
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+    matches = 0;
+
+    document.getElementById("memoryResult").textContent =
+        "Find the matching pairs!";
+
+    const shuffled = [...emojis].sort(() => Math.random() - 0.5);
+    const grid = document.getElementById("memoryGrid");
+
+    grid.innerHTML = "";
+
+    shuffled.forEach(emoji => {
+        const card = document.createElement("button");
+        card.className = "memory-card";
+        card.textContent = "?";
+        card.dataset.emoji = emoji;
+
+        card.addEventListener("click", () => flipCard(card));
+
+        grid.appendChild(card);
+    });
+}
+
+function flipCard(card) {
+    if (lockBoard || card === firstCard ||
+        card.classList.contains("matched") ||
+        card.textContent !== "?") return;
+
+    card.textContent = card.dataset.emoji;
+
+    if (!firstCard) {
+        firstCard = card;
+        return;
+    }
+
+    secondCard = card;
+    lockBoard = true;
+
+    if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+        firstCard.classList.add("matched");
+        secondCard.classList.add("matched");
+
+        matches++;
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+
+        if (matches === 8) {
+            document.getElementById("memoryResult").textContent =
+                "🎉 Amazing! You matched all pairs!";
+        }
+    } else {
+        memoryTimeout = setTimeout(() => {
+            firstCard.textContent = "?";
+            secondCard.textContent = "?";
+
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }, 800);
+    }
+}
+
+newMemoryGame();
+
+</script>
+
+</body>
+</html>
